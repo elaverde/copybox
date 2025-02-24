@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto Mono", monospace;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+/* styles.css */
+:root {
+  --font-family: "Roboto Mono", sans-serif;
+  --dark-bg-color: #242424;
+  --dark-secondary-bg-color: #2e2e2e;
+  --dark-accent-color: #427b36;
+  --font-color: #ffffff; /* Color de fuente blanco para contraste */
+}
+
+body {
+  background-color: var(--dark-bg-color);
+  color: var(--font-color);
+}
+.primary-background {
+  background-color: var(--dark-bg-color);
+}
+.secondary-background {
+  background-color: var(--dark-secondary-bg-color);
+}
+.accent-background {
+  background-color: var(--dark-accent-color);
+}
+.accent {
+  color: var(--dark-accent-color);
+}
+.row {
+  display: flex;
+  flex-direction: column;
+  & input {
+    margin: 10px 10px;
+    min-height: 30px;
+    outline: none;
+    font-family: "Roboto Mono", monospace;
+  }
+  & button {
+    margin: 10px 10px;
+    min-height: 40px;
+    background-color: var(--dark-accent-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: "Roboto Mono", monospace;
+    font-size: 1rem;
+  }
+  & button:hover {
+    opacity: 0.8;
+  }
+  & select {
+    margin: 10px 10px;
+    min-height: 40px;
+    font-family: "Roboto Mono", monospace;
+  }
+  & label {
+    margin: 2px 8px 2px 10px;
+  }
+}

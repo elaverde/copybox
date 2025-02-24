@@ -1,0 +1,37 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  display: none;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+}
+.header-left h1 {
+  margin-left: 10px;
+}
+.header-left img {
+  margin-left: -2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+
+  background-color: var(--dark-secondary-bg-color);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  width: 25px;
+}
+.header-right:hover {
+  background-color: #00b368;
+}
+
+a:link,
+a:visited {
+  color: white;
+}

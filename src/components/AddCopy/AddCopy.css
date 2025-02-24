@@ -1,0 +1,14 @@
+.add-copy-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.add-copy-button:hover {
+  background-color: #00b368;
+}

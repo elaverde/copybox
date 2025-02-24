@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  color: white;
+  margin-bottom: 5px;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+.header-right {
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: var(--dark-secondary-bg-color);
+  border-radius: 15px;
+  color: white;
+  transition: all 0.3s ease;
+  border: none;
+  width: 25px;
+}
+.header-right:hover {
+  background-color: #00b368;
+}
