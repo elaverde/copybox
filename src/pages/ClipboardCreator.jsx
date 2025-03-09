@@ -2,18 +2,23 @@ import HeaderPage from "../components/HeaderPage/HeaderPage"; // Asegúrate de q
 import { useState } from "react";
 import { useCopybox } from "../context/CopyboxContext.jsx";
 import { Toaster, toast } from "react-hot-toast";
-import Swal from "sweetalert2";
 
-const ClipboardCreator = () => {
+const ClipboardCreator = ({ item, onClose }) => {
   const [type, setType] = useState("text");
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
-  const { addObjectToKey, keyExists, getActiveKey, addKey } = useCopybox();
-
+  const { addObjectToKey, updateObjectInKey, keyExists, getActiveKey, addKey } =
+    useCopybox();
   const handleClose = () => {
-    console.log("Close button clicked");
+    onClose();
   };
-
+  useState(() => {
+    if (item) {
+      setType(item.type);
+      setTitle(item.text);
+      setValue(item.value);
+    }
+  }, [item]);
   const handleSave = () => {
     if (!title || !value) {
       toast.error("Por favor, ingrese un título y un valor");
@@ -29,26 +34,42 @@ const ClipboardCreator = () => {
      *  si keyActivated es Todos, no se puede guardar para ello vamos revisar
      *  si existe la carpeta otros, si no existe la creamos y guardamos el campo
      */
-    if (keyActivated === "Todos") {
-      if (!keyExists("Otros")) {
-        if (!addKey("Otros")) {
-          toast.error("Error al agregar el campo");
-          return;
+    let key =
+      item?.key === undefined || item?.key === null ? keyActivated : item?.key;
+    // si el objeto item es undefined, entonces estamos creando un nuevo campo
+    if (item === undefined || item === null) {
+      if (keyActivated === "Todos") {
+        if (!keyExists("Otros")) {
+          if (!addKey("Otros")) {
+            toast.error("Error al agregar el campo");
+            return;
+          }
+          keyActivated = "Otros";
+        } else {
+          keyActivated = "Otros";
         }
-        keyActivated = "Otros";
+      }
+      if (addObjectToKey(key, data)) {
+        toast.success("Campo agregado con éxito");
+        setTitle("");
+        setValue("");
       } else {
-        keyActivated = "Otros";
+        toast.error("Error al agregar el campo");
+      }
+    } else {
+      // si el objeto item no es undefined, entonces estamos editando un campo existente
+      if (updateObjectInKey(key, item, data)) {
+        toast.success("Campo actualizado con éxito");
+        setTitle("");
+        setValue("");
+      } else {
+        toast.error("Error al actualizar el campo");
       }
     }
-    if (addObjectToKey(keyActivated, data)) {
-      toast.success("Campo agregado con éxito");
-      setTitle("");
-      setValue("");
-    } else {
-      toast.error("Error al agregar el campo");
-    }
+    // redireccionar a la página anterior
+    onClose();
+    window.history.back();
   };
-
   return (
     <div>
       <HeaderPage title="Agregar Campo" onClose={handleClose} />
@@ -83,5 +104,4 @@ const ClipboardCreator = () => {
     </div>
   );
 };
-
 export default ClipboardCreator;

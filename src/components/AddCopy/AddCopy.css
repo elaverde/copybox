@@ -7,8 +7,12 @@
   border: none;
   border-radius: 15px;
   cursor: pointer;
+  border: 2px solid #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .add-copy-button:hover {
   background-color: #00b368;
+  border: 2px solid #fff;
 }

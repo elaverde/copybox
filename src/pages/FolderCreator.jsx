@@ -15,12 +15,10 @@ const FolderCreator = () => {
   const { data, addKey, deleteKey, updateKey, getActiveKey, selectKey } =
     useCopybox();
   const [refreshKey, setRefreshKey] = useState(0);
-
   const handleOpenModal = () => {
     setShowModal(true);
     setIsModalOpen(true);
   };
-
   const handleSubmit = () => {
     const trimmedValue = inputValue.trim();
 
@@ -29,7 +27,6 @@ const FolderCreator = () => {
       toast.error("Por favor, ingresa un nombre válido.");
       return;
     }
-
     if (addKey(trimmedValue)) {
       setInputValue("");
       setRefreshKey((prevKey) => prevKey + 1);
@@ -53,12 +50,8 @@ const FolderCreator = () => {
       if (result.isConfirmed) {
         deleteKey(key);
         setRefreshKey((prevKey) => prevKey + 1);
-        console.log("Active key", getActiveKey());
-        console.log("Key", key);
         if (getActiveKey() === key) {
           selectKey("Todos");
-
-          console.log("Active key", getActiveKey());
         }
         toast.success("¡Carpeta eliminada con éxito! 🗑️");
       }
@@ -78,14 +71,12 @@ const FolderCreator = () => {
     setInputValue(""); // Limpiar input al cerrar
     setError(""); // Resetear error al cerrar
   };
-
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
     if (e.target.value.trim().length > 0) {
       setError(""); // Limpiar el error cuando se empieza a escribir
     }
   };
-
   return (
     <div>
       <HeaderPage title="Carpetas" onClose={handleCloseModal} />
@@ -124,5 +115,4 @@ const FolderCreator = () => {
     </div>
   );
 };
-
 export default FolderCreator;

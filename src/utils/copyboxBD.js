@@ -140,6 +140,30 @@ export const useCopyboxBd = () => {
     return true;
   };
 
+  const updateObjectInKey = (key, oldobject, newobject) => {
+    if (!keyExists(key)) {
+      console.warn(`La clave "${key}" no existe`);
+      return false;
+    }
+    // buscamos el objeto a actualizar el key espacificado y el objeto
+    const index = data[key].findIndex(
+      (item) =>
+        item.type === oldobject.type &&
+        item.text === oldobject.text &&
+        item.value === oldobject.value
+    );
+    if (index === -1) {
+      console.warn("El objeto no existe en esta clave");
+      return false;
+    }
+    // actualizamos el objeto
+    const newArray = [...data[key]];
+    newArray[index] = newobject;
+    updateStorage({ ...data, [key]: newArray });
+
+    return true;
+  };
+
   const deleteObjectFromKey = (key, index) => {
     if (!keyExists(key)) {
       console.warn(`La clave "${key}" no existe`);
@@ -239,6 +263,7 @@ export const useCopyboxBd = () => {
     addKey,
     updateKey,
     addObjectToKey,
+    updateObjectInKey,
     deleteObjectFromKey,
     deleteKey,
     listAllKeys,

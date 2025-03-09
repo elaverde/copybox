@@ -3,11 +3,12 @@
   justify-content: space-between;
   align-items: center;
   color: white;
-  display: none;
+  width: 98%;
 }
 .header-left {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 .header-left h1 {
   margin-left: 10px;

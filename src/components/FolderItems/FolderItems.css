@@ -6,23 +6,24 @@
 .scroll-button {
   background-color: #323232;
   width: 50px;
-  height: 50px;
+  height: 10px;
   margin: 0 10px 0 10px;
   font-size: 10px;
   text-align: center;
   border: none;
   color: white;
   cursor: pointer;
-  width: 4%;
+  width: 2%;
 }
 
 .folder-list {
   display: flex;
-  overflow-x: auto;
   list-style-type: none;
   padding: 0;
   margin: 0;
   width: 92%;
+  overflow: hidden;
+  padding-bottom: 5px;
 }
 
 .folder-list li {

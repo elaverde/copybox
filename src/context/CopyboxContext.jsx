@@ -2,9 +2,7 @@
 import { createContext, useContext } from "react";
 import PropTypes from "prop-types";
 import { useCopyboxBd } from "../utils/copyboxBD";
-
 const CopyboxContext = createContext();
-
 export const CopyboxProvider = ({ children }) => {
   const {
     data,
@@ -15,6 +13,7 @@ export const CopyboxProvider = ({ children }) => {
     addKey,
     updateKey,
     addObjectToKey,
+    updateObjectInKey,
     deleteObjectFromKey,
     deleteKey,
     listAllKeys,
@@ -24,7 +23,6 @@ export const CopyboxProvider = ({ children }) => {
     getActiveKey,
     isActiveKey,
   } = useCopyboxBd();
-
   return (
     <CopyboxContext.Provider
       value={{
@@ -35,6 +33,7 @@ export const CopyboxProvider = ({ children }) => {
         addKey,
         updateKey,
         addObjectToKey,
+        updateObjectInKey,
         deleteObjectFromKey,
         deleteKey,
         listAllKeys,

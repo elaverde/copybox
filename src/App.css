@@ -6,6 +6,8 @@ body {
   font-family: "Roboto Mono", monospace;
   background-color: #f9f9f9;
   box-sizing: border-box;
+  width: 780px !important;
+  height: 580px !important;
 }
 /* styles.css */
 :root {
@@ -14,6 +16,23 @@ body {
   --dark-secondary-bg-color: #2e2e2e;
   --dark-accent-color: #427b36;
   --font-color: #ffffff; /* Color de fuente blanco para contraste */
+}
+/* Para navegadores basados en WebKit (Chrome, Edge, etc.) */
+::-webkit-scrollbar {
+  width: 6px; /* Ancho del scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color del thumb (barra que se mueve) */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color al pasar el mouse */
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Color del fondo del scroll */
 }
 
 body {
@@ -63,4 +82,60 @@ body {
   & label {
     margin: 2px 8px 2px 10px;
   }
+}
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: end;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  background-color: var(--dark-secondary-bg-color);
+  color: var(--font-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  button {
+    margin-top: 10px;
+    background-color: var(--dark-accent-color);
+    font-family: "Roboto Mono", monospace;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  input {
+    background-color: var(--dark-secondary-bg-color);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: "Roboto Mono", monospace;
+  }
+  input {
+    margin: 10px 0;
+  }
+  img {
+    width: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    background-color: var(--dark-secondary-bg-color);
+  }
+}
+.browser {
+  background-color: var(--dark-secondary-bg-color);
+}
+.browser_nav {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  padding-right: 15px;
+  background-color: var(--dark-secondary-bg-color);
+  z-index: 100;
+  border-bottom: 1px solid #55555554;
+}
+.browser_content {
+  margin-top: 130px;
+  padding: 10px;
+  min-height: 500px !important;
 }

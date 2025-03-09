@@ -3,7 +3,7 @@ import { FaCopy, FaEllipsisV } from "react-icons/fa"; // Importar los íconos ne
 import Swal from "sweetalert2";
 import "./TextCopy.css";
 import PropTypes from "prop-types";
-
+import { Toaster, toast } from "react-hot-toast";
 const TextCopy = ({
   title = "Copiar texto",
   valueCopy = "",
@@ -11,28 +11,23 @@ const TextCopy = ({
   onUpdate,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
-
   const copyToClipboard = () => {
     navigator.clipboard
       .writeText(valueCopy)
       .then(() => {
-        alert("Texto copiado al portapapeles");
+        toast.success("Texto copiado al portapapeles! 🎉");
       })
       .catch((err) => {
         console.error("Error al copiar texto: ", err);
       });
   };
-
   const toggleDropdown = () => {
     setShowDropdown((prevShowDropdown) => !prevShowDropdown);
   };
-
   const handleEdit = () => {
-    console.log("Level 1 Editando...");
     onUpdate();
     setShowDropdown(false);
   };
-
   const handleDelete = () => {
     Swal.fire({
       title: "¿Estás seguro?",
@@ -48,7 +43,6 @@ const TextCopy = ({
     });
     setShowDropdown(false);
   };
-
   return (
     <div className="text-copy-container secondary-background">
       <h2 className="text-copy-title">
@@ -69,7 +63,6 @@ const TextCopy = ({
           )}
         </div>
       </h2>
-
       <div className="text-copy-row">
         <input
           type="text"
@@ -84,6 +77,7 @@ const TextCopy = ({
           <FaCopy />
         </button>
       </div>
+      <Toaster position="top-right" /> {/* Renderizar notificaciones */}
     </div>
   );
 };
@@ -93,5 +87,4 @@ TextCopy.propTypes = {
   onDelete: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
-
 export default TextCopy;

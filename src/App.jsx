@@ -1,8 +1,8 @@
 // src/App.jsx
 import React from "react";
 import { useState } from "react";
-
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import About from "./pages/About";
 import ClipboardBrowser from "./pages/ClipboardBrowser";
 import ClipboardCreator from "./pages/ClipboardCreator";
 import FolderCreator from "./pages/FolderCreator";
@@ -17,6 +17,8 @@ function App() {
   const handleEditItem = (item) => {
     setSelectedItem(item);
     setClipboardCreatorOpen(true);
+    window.history.pushState({}, "", "/clipboard-creator");
+    window.dispatchEvent(new PopStateEvent("popstate", { state: {} }));
   };
 
   const handleCloseClipboardCreator = () => {
@@ -32,6 +34,11 @@ function App() {
             path="/"
             element={<ClipboardBrowser onEditItem={handleEditItem} />}
           />
+          <Route
+            path="/index.html"
+            element={<ClipboardBrowser onEditItem={handleEditItem} />}
+          />
+          <Route path="/about" element={<About />} />
           <Route
             path="/clipboard-browser"
             element={<ClipboardBrowser onEditItem={handleEditItem} />}

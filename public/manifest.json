@@ -1,21 +1,25 @@
 {
-    "manifest_version": 3,
-    "name": "React Chrome Extension",
-    "version": "1.0",
-    "description": "Una extensión de Chrome creada con React",
-    "permissions": [],
-    "action": {
-      "default_popup": "index.html",
-      "default_icon": {
-        "16": "icon-16.png",
-        "48": "icon-48.png",
-        "128": "icon-128.png"
-      }
-    },
-    "icons": {
+  "manifest_version": 3,
+  "name": "CopyBox",
+  "version": "0.1",
+  "description": "Guarda y organiza fragmentos de texto fácilmente con CopyBox.",
+  "permissions": [],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
       "16": "icon-16.png",
       "48": "icon-48.png",
       "128": "icon-128.png"
     }
+  },
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "copybox@elaverde.me"
+    }
   }
-  
+}
