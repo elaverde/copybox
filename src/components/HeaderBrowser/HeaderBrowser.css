@@ -36,3 +36,40 @@ a:link,
 a:visited {
   color: white;
 }
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.search-input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 200px;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #00b368;
+}
+
+.search-button {
+  padding: 5px 12px;
+  background-color: #00b36825;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #007a4d;
+}
+
+.search-button i {
+  font-size: 16px;
+}

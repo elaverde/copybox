@@ -137,5 +137,6 @@ body {
 .browser_content {
   margin-top: 130px;
   padding: 10px;
+  padding-bottom: 70px;
   min-height: 500px !important;
 }

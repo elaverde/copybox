@@ -1,64 +1,35 @@
 import { useState, useEffect } from "react";
-
-// utils/copyboxBD.js
-export const getCopyboxBd = () => {
-  if (typeof window === "undefined") return {};
-  const data = localStorage.getItem("copybox_bd");
-  const defaultData = { Otros: [] };
-  if (!data) {
-    saveCopyboxBd(defaultData);
-    return defaultData;
-  }
-  getConfigBd();
-  return data ? JSON.parse(data) : {};
-};
-
-export const getConfigBd = () => {
-  if (typeof window === "undefined") return {};
-  const configData = localStorage.getItem("config_bd");
-  const defaultConfig = { selectedFolder: "Todos" };
-  if (!configData) {
-    localStorage.setItem("config_bd", JSON.stringify(defaultConfig));
-    return defaultConfig;
-  }
-  return configData ? JSON.parse(configData) : {};
-};
-
-export const saveConfigBd = (config) => {
-  localStorage.setItem("config_bd", JSON.stringify(config));
-};
-
-const saveCopyboxBd = (data) => {
-  localStorage.setItem("copybox_bd", JSON.stringify(data));
-};
+import {
+  getCopyboxBd,
+  saveCopyboxBd,
+  getConfigBd,
+  saveConfigBd,
+} from "./storage";
 
 // Custom Hook para React
 export const useCopyboxBd = () => {
+  // 🟢 ESTADOS PRINCIPALES
   const [data, setData] = useState(getCopyboxBd);
-  const initialConfig = getConfigBd();
-  const [selectedKey, setSelectedKey] = useState(initialConfig.selectedFolder);
+  const [selectedKey, setSelectedKey] = useState(getConfigBd().selectedFolder);
   const [objects, setObjects] = useState([]);
+
+  // 🟢 EFECTOS SECUNDARIOS
+  useEffect(() => {
+    setObjects(listObjectsInSelectedKey());
+  }, [selectedKey, data]); // Se actualiza cuando cambia `selectedKey` o `data`
+
+  // 🔵 FUNCIONES AUXILIARES
   const updateStorage = (newData) => {
     saveCopyboxBd(newData);
     setData(newData);
-    setTimeout(() => {
-      listObjectsInSelectedKey();
-    }, 100);
   };
 
   const keyExists = (key) => {
-    // forzamos a recargamos la data
-    const updatedData = getCopyboxBd();
-    setData((prevData) => {
-      const newData = { ...prevData, ...updatedData };
-      return newData;
-    });
-    return Boolean(updatedData[key]);
+    return Boolean(getCopyboxBd()[key]);
   };
 
   const objectExistsInKey = (key, object) => {
-    if (!data[key]) return false;
-    return data[key].some(
+    return data[key]?.some(
       (item) =>
         item.type === object.type &&
         item.text === object.text &&
@@ -66,19 +37,16 @@ export const useCopyboxBd = () => {
     );
   };
 
+  // 🟠 OPERACIONES SOBRE CLAVES
+  const addKey = (key) => {
+    if (keyExists(key) || !key.trim()) return false;
+    updateStorage({ ...data, [key]: [] });
+    return true;
+  };
+
   const updateKey = (oldKey, newKey) => {
-    if (!keyExists(oldKey)) {
-      console.warn(`La clave "${oldKey}" no existe`);
-      return false;
-    }
-
-    if (keyExists(newKey)) {
-      console.warn(`La clave "${newKey}" ya existe`);
-      return false;
-    }
-
-    if (!newKey || typeof newKey !== "string") {
-      console.error("La nueva clave debe ser un string válido");
+    if (!keyExists(oldKey) || keyExists(newKey) || !newKey.trim()) {
+      console.warn(`Error con la clave: "${oldKey}" o "${newKey}"`);
       return false;
     }
 
@@ -88,189 +56,110 @@ export const useCopyboxBd = () => {
     return true;
   };
 
-  const addKey = (key) => {
-    if (keyExists(key)) {
-      console.warn(`La clave "${key}" ya existe`);
-      return false;
-    }
-
-    if (!key || typeof key !== "string") {
-      console.error("La clave debe ser un string válido");
-      return false;
-    }
-
-    updateStorage({ ...data, [key]: [] });
-    return true;
-  };
-
-  const addObjectToKey = (key, object) => {
-    if (!keyExists(key)) {
-      console.warn(`La clave "${key}" no existe`);
-      return false;
-    }
-
-    if (!object || typeof object !== "object") {
-      console.error("El objeto debe ser un objeto válido");
-      return false;
-    }
-
-    const requiredProps = ["type", "text", "value"];
-    if (!requiredProps.every((prop) => prop in object)) {
-      console.error(
-        "El objeto debe contener las propiedades: type, text, value"
-      );
-      return false;
-    }
-
-    if (objectExistsInKey(key, object)) {
-      console.warn("El objeto ya existe en esta clave");
-      return false;
-    }
-    const updatedData = getCopyboxBd();
-    setData((prevData) => {
-      const newData = { ...prevData, ...updatedData };
-      return newData;
-    });
-    const newArray = [...data[key], object];
-    updateStorage({ ...data, [key]: newArray });
-    // actualizamos la lista de objetos si la clave seleccionada es la misma
-    setTimeout(() => {
-      setObjects([...data[key]]);
-    }, 1000);
-    return true;
-  };
-
-  const updateObjectInKey = (key, oldobject, newobject) => {
-    if (!keyExists(key)) {
-      console.warn(`La clave "${key}" no existe`);
-      return false;
-    }
-    // buscamos el objeto a actualizar el key espacificado y el objeto
-    const index = data[key].findIndex(
-      (item) =>
-        item.type === oldobject.type &&
-        item.text === oldobject.text &&
-        item.value === oldobject.value
-    );
-    if (index === -1) {
-      console.warn("El objeto no existe en esta clave");
-      return false;
-    }
-    // actualizamos el objeto
-    const newArray = [...data[key]];
-    newArray[index] = newobject;
-    updateStorage({ ...data, [key]: newArray });
-
-    return true;
-  };
-
-  const deleteObjectFromKey = (key, index) => {
-    if (!keyExists(key)) {
-      console.warn(`La clave "${key}" no existe`);
-      return false;
-    }
-    // Eliminamos el objeto que tenga el índice indicado
-    const newArray = [...data[key]];
-    newArray.splice(index, 1);
-    updateStorage({ ...data, [key]: newArray });
-    return true;
-  };
-
   const deleteKey = (key) => {
-    if (!keyExists(key)) {
-      console.warn(`La clave "${key}" no existe`);
-      return false;
-    }
-
+    if (!keyExists(key)) return false;
     const newData = { ...data };
     delete newData[key];
     updateStorage(newData);
     return true;
   };
 
-  // Nuevos métodos agregados
-  const listAllKeys = () => {
-    return Object.keys(data);
-  };
-
-  const listObjectsByKey = (key) => {
-    if (!keyExists(key)) {
-      console.warn(`La clave "${key}" no existe`);
-      return [];
-    }
-    return [...data[key]]; // Devolvemos copia para evitar mutaciones
-  };
-
-  const getAllData = () => {
-    return { ...data }; // Devolvemos copia del objeto completo
-  };
-
-  // Nuevas funciones para manejar la carpeta seleccionada
   const selectKey = (key) => {
-    if (!keyExists(key) && key !== "Todos") {
-      console.warn(`La clave "${key}" no existe`);
-      return false;
-    }
+    if (!keyExists(key) && key !== "Todos") return false;
     const config = getConfigBd();
     config.selectedFolder = key;
     saveConfigBd(config);
     setSelectedKey(key);
-    listObjectsInSelectedKey();
     return true;
   };
 
+  // 🟣 OPERACIONES SOBRE OBJETOS
+  const addObjectToKey = (key, object) => {
+    if (!keyExists(key) || objectExistsInKey(key, object)) return false;
+    const newArray = [...data[key], object];
+    updateStorage({ ...data, [key]: newArray });
+    return true;
+  };
+
+  const updateObjectInKey = (key, oldObject, newObject) => {
+    if (!keyExists(key)) return false;
+    const index = data[key].findIndex(
+      (item) =>
+        item.type === oldObject.type &&
+        item.text === oldObject.text &&
+        item.value === oldObject.value
+    );
+    if (index === -1) return false;
+    const newArray = [...data[key]];
+    newArray[index] = newObject;
+    updateStorage({ ...data, [key]: newArray });
+    return true;
+  };
+
+  const deleteObjectFromKey = (key, index) => {
+    if (!keyExists(key) || index < 0 || index >= data[key].length) return false;
+    const newArray = [...data[key]];
+    newArray.splice(index, 1);
+    updateStorage({ ...data, [key]: newArray });
+    return true;
+  };
+
+  // 🔴 FUNCIONES DE LISTADO Y BÚSQUEDA
+  const listAllKeys = () => Object.keys(data);
+
+  const listObjectsByKey = (key) => (keyExists(key) ? [...data[key]] : []);
+
   const listObjectsInSelectedKey = () => {
-    setObjects([]);
-    if (!selectedKey) {
-      console.warn("No hay ninguna clave seleccionada");
-      return [];
-    }
+    if (!selectedKey) return [];
     if (selectedKey === "Todos") {
-      const allData = getAllData();
-      const allObjects = Object.keys(allData).reduce((acc, key) => {
-        const objectsWithKey = allData[key].map((obj) => ({ ...obj, key }));
-        return [...acc, ...objectsWithKey];
-      }, []);
-      setObjects(allObjects);
-      return allObjects;
-    } else {
-      const objectsWithKey = listObjectsByKey(selectedKey).map((obj) => ({
-        ...obj,
-        key: selectedKey,
-      }));
-      setObjects(objectsWithKey);
-      return objectsWithKey;
+      return Object.keys(data).flatMap((key) =>
+        data[key].map((obj) => ({ ...obj, key }))
+      );
     }
+    return listObjectsByKey(selectedKey).map((obj) => ({
+      ...obj,
+      key: selectedKey,
+    }));
   };
 
-  const isActiveKey = (key) => {
-    return key === selectedKey;
-  };
-  const getActiveKey = () => {
-    return selectedKey;
+  const listObjectsSearch = (search) => {
+    const allObjects = Object.keys(data).flatMap((key) =>
+      data[key].map((obj) => ({ ...obj, key }))
+    );
+    const filteredObjects = allObjects.filter((obj) =>
+      obj.text.toLowerCase().includes(search.toLowerCase())
+    );
+    setObjects(filteredObjects);
+    return filteredObjects;
   };
 
-  const dataArray = Object.keys(data).map((key) => ({
-    key,
-    objects: data[key].map((obj) => ({ ...obj, key })),
-  }));
+  // 🟡 ESTADO ACTUAL Y RETORNO
+  const getAllData = () => ({ ...data });
+
+  const isActiveKey = (key) => key === selectedKey;
+
+  const getActiveKey = () => selectedKey;
 
   return {
-    data: dataArray,
-    keyExists,
+    data: Object.keys(data).map((key) => ({
+      key,
+      objects: data[key].map((obj) => ({ ...obj, key })),
+    })),
     objects,
+    keyExists,
     objectExistsInKey,
     addKey,
     updateKey,
+    deleteKey,
+    selectKey,
     addObjectToKey,
     updateObjectInKey,
     deleteObjectFromKey,
-    deleteKey,
     listAllKeys,
     listObjectsByKey,
-    getAllData,
-    selectKey,
     listObjectsInSelectedKey,
+    listObjectsSearch,
+    getAllData,
     isActiveKey,
     getActiveKey,
   };

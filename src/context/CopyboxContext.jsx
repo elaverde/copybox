@@ -20,6 +20,7 @@ export const CopyboxProvider = ({ children }) => {
     listObjectsByKey,
     getAllData,
     listObjectsInSelectedKey,
+    listObjectsSearch,
     getActiveKey,
     isActiveKey,
   } = useCopyboxBd();
@@ -41,6 +42,7 @@ export const CopyboxProvider = ({ children }) => {
         getAllData,
         selectKey,
         listObjectsInSelectedKey,
+        listObjectsSearch,
         getActiveKey,
         isActiveKey,
       }}
