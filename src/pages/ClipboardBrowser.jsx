@@ -18,7 +18,7 @@ const ClipboardBrowser = ({ onEditItem }) => {
 
   const [arrCopyText, setArrCopyText] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [isScrolling, setIsScrolling] = useState(false);
   const indexKey = getActiveKey();
 
   const handleSearch = useCallback((term) => {
@@ -59,6 +59,27 @@ const ClipboardBrowser = ({ onEditItem }) => {
     [selectKey, setSearchTerm]
   );
 
+  // función para detectar el scroll
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.body.scrollHeight;
+
+    // detectamos el inicio del scroll
+    if (scrollTop === 0) {
+      setIsScrolling(false);
+    }
+    else
+    {
+      setIsScrolling(true);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <div className="browser">
       <nav className="browser_nav">
@@ -82,9 +103,16 @@ const ClipboardBrowser = ({ onEditItem }) => {
             />
           ) : null
         )}
+        <div
+          style={{
+            transition: "opacity 0.3s",
+            opacity: isScrolling ? 0 : 1,
+            pointerEvents: isScrolling ? "none" : "auto",
+          }}
+        >
+          {!isScrolling && <AddCopy link="/clipboard-creator" />}
+        </div>
       </div>
-
-      <AddCopy link="/clipboard-creator" />
     </div>
   );
 };
