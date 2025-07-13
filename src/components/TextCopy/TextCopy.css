@@ -48,11 +48,11 @@
 }
 
 .text-copy-button:hover {
-  background-color: #00b368;
+  background-color: var(--dark-accent-color);
 }
 
 .text-copy-button:active {
-  background-color: #00b36830;
+  opacity: 0.5;
 }
 .dropdown-container {
   position: relative;

@@ -4,6 +4,8 @@ import { Toaster, toast } from "react-hot-toast";
 import copySound from "../../assets/copy.mp3";
 import Swal from "sweetalert2";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+
 import "./TextCopy.css";
 
 const TextCopy = ({
@@ -13,6 +15,7 @@ const TextCopy = ({
   onUpdate,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const { t } = useTranslation();
 
   /** 🔹 Alternar visibilidad del menú desplegable */
   const toggleDropdown = () => {
@@ -25,11 +28,11 @@ const TextCopy = ({
       .writeText(valueCopy)
       .then(() => {
         new Audio(copySound).play(); // Reproducir sonido
-        toast.success("Texto copiado al portapapeles! 🎉");
+        toast.success(t("copybox.msg-success-copy"));
       })
       .catch((err) => {
         console.error("Error al copiar texto: ", err);
-        toast.error("No se pudo copiar el texto.");
+        toast.error(t("copybox.msg-error-copy"));
       });
   };
 
@@ -42,12 +45,12 @@ const TextCopy = ({
   /** 🔹 Confirmar eliminación */
   const handleDelete = () => {
     Swal.fire({
-      title: "¿Estás seguro?",
-      text: "Esta acción no se puede deshacer",
+      title: t("alert-delete.title"),
+      text: t("alert-delete.text"),
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Sí, eliminar",
-      cancelButtonText: "Cancelar",
+      confirmButtonText: t("alert-delete.confirmButtonText"),
+      cancelButtonText: t("alert-delete.cancelButtonText"),
     }).then((result) => {
       if (result.isConfirmed) {
         onDelete();
@@ -79,14 +82,14 @@ const TextCopy = ({
                 className="dropdown-item"
                 role="menuitem"
               >
-                Editar
+                {t("copybox.option-edit")}
               </button>
               <button
                 onClick={handleDelete}
                 className="dropdown-item"
                 role="menuitem"
               >
-                Eliminar
+                {t("copybox.option-delete")}
               </button>
             </div>
           )}

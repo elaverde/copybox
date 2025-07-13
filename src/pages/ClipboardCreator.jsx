@@ -2,8 +2,9 @@ import HeaderPage from "../components/HeaderPage/HeaderPage"; // Asegúrate de q
 import { useState } from "react";
 import { useCopybox } from "../context/CopyboxContext.jsx";
 import { Toaster, toast } from "react-hot-toast";
-
+import { useTranslation } from "react-i18next";
 const ClipboardCreator = ({ item, onClose }) => {
+  const { t, i18n } = useTranslation();
   const [type, setType] = useState("text");
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
@@ -41,7 +42,7 @@ const ClipboardCreator = ({ item, onClose }) => {
       if (keyActivated === "Todos") {
         if (!keyExists("Otros")) {
           if (!addKey("Otros")) {
-            toast.error("Error al agregar el campo");
+            toast.error(t("copybox.error-add"));
             return;
           }
           keyActivated = "Otros";
@@ -50,20 +51,20 @@ const ClipboardCreator = ({ item, onClose }) => {
         }
       }
       if (addObjectToKey(key, data)) {
-        toast.success("Campo agregado con éxito");
+        toast.success(t("copybox.success-add"));
         setTitle("");
         setValue("");
       } else {
-        toast.error("Error al agregar el campo");
+        toast.error(t("copybox.error-add"));
       }
     } else {
       // si el objeto item no es undefined, entonces estamos editando un campo existente
       if (updateObjectInKey(key, item, data)) {
-        toast.success("Campo actualizado con éxito");
+        toast.success(t("copybox.success-update"));
         setTitle("");
         setValue("");
       } else {
-        toast.error("Error al actualizar el campo");
+        toast.error(t("copybox.error-update"));
       }
     }
     // redireccionar a la página anterior
@@ -72,33 +73,33 @@ const ClipboardCreator = ({ item, onClose }) => {
   };
   return (
     <div>
-      <HeaderPage title="Agregar Campo" onClose={handleClose} />
-      <div className="row">
+      <HeaderPage title={t("copybox.title")} onClose={handleClose} />
+      <div style={{ display: "none" }} className="row">
         <label>Tipo</label>
         <select value={type} onChange={(e) => setType(e.target.value)}>
           <option value="text">Texto</option>
         </select>
       </div>
       <div className="row">
-        <label>Titulo</label>
+        <label>{t("copybox.input-title")}</label>
         <input
-          type="text"
-          placeholder="Ingrese el título"
+          type={t("copybox.input-title")}
+          placeholder={t("copybox.input-title-placeholder")}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
       <div className="row">
-        <label>Valor</label>
+        <label>{t("copybox.input-value")}</label>
         <input
           type="text"
-          placeholder="Ingrese el valor"
+          placeholder={t("copybox.input-value-placeholder")}
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
       </div>
       <div className="row">
-        <button onClick={handleSave}>Guardar</button>
+        <button onClick={handleSave}>{t("copybox.button-save")}</button>
       </div>
       <Toaster position="top-right" /> {/* Renderizar notificaciones */}
     </div>

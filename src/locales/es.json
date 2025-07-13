@@ -1,0 +1,57 @@
+{
+  "about": {
+    "title": "Configuración",
+    "subtitle-about": "¡Apoya CopyBox! 🚀",
+    "text-about": "<p>CopyBox es una herramienta gratuita diseñada para hacerte la vida más fácil al copiar texto con un solo clic. Si te ha sido útil y quieres ayudar a mantener su desarrollo, considera hacer una donación.</p><p>💙 Cada aporte nos ayuda a mejorar y mantener CopyBox en línea. </p><p>🔹 Dona aquí: 👉 Haz tu donación con PayPal</p><p> ¡Gracias por tu apoyo! 🙌</p>"
+  },
+  "welcome": "Bienvenido",
+  "greeting": "Hola {{name}}!",
+  "settings":{
+    "title": "Configuración",
+    "language": "Idioma",
+    "export": "Exportar",
+    "import": "Importar",
+    "msg-success-import": "✅ Datos importados correctamente.",
+    "msg-error-import": "❌ Error al importar los datos."
+  },
+  "search": {
+    "title": "Buscar",
+    "placeholder": "Buscar..."
+  },
+  "category-all": "Todos",
+  "copybox": {
+    "title": "Agregar Campo",
+    "input-title":"Título",
+    "input-title-placeholder": "Escribe el título aquí...",
+    "input-value": "Valor",
+    "input-value-placeholder": "Escribe el valor aquí...",
+    "option-delete": "Eliminar",
+    "option-edit": "Editar",
+    "button-save": "Guardar",
+    "msg-success-copy": "Texto copiado al portapapeles! 🎉",
+    "msg-error-copy": "No se pudo copiar el texto.",
+    "success-add": "¡Campo agregado con éxito! 🎉",
+    "success-update": "¡Campo actualizado con éxito! 🎉",
+    "error-add": "Error al agregar el campo.",
+    "error-update": "Error al actualizar el campo."
+  },
+  "alert-delete":{
+    "title":"¿Estás seguro?",
+    "text": "Esta acción no se puede deshacer",
+    "confirmButtonText": "Sí, eliminar",
+    "cancelButtonText": "Cancelar"
+  },
+  "folder": {
+    "title": "Carpetas",
+    "success-delete": "¡Carpeta eliminada con éxito! 🗑️",
+    "input-title-placeholder": "Escribe el Nombre de la carpeta aquí...",
+    "validation-empty": "El nombre de la carpeta no puede estar vacío",
+    "validation-exists": "Este nombre de carpeta ya existe 😢",
+    "success-create": "¡Carpeta creada con éxito! 🎉",
+    "success-update": "¡Carpeta actualizada con éxito! 🎉",
+    "button-add": "Crear Carpeta",
+    "modal-title": "Crear Carpeta"
+  }
+  
+
+}

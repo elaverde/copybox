@@ -19,11 +19,12 @@ const FolderItemsEditor = ({ items, onDelete, onUpdate }) => {
   };
 
   const handleBlur = () => {
-    setEditingIndex(null);
-    if (onUpdate) {
-      onUpdate(oldKey, editingValue);
-    }
-  };
+  setEditingIndex(null);
+  if (onUpdate && oldKey !== editingValue) {
+    onUpdate(oldKey, editingValue);
+  }
+};
+
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -32,7 +33,7 @@ const FolderItemsEditor = ({ items, onDelete, onUpdate }) => {
   };
 
   return (
-    <ul>
+    <ul className="folder-items-editor">
       {items.map((item, index) => (
         <li
           key={index}

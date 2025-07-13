@@ -1,0 +1,55 @@
+{
+  "about": {
+    "title": "Paramètres",
+    "subtitle-about": "Soutenez CopyBox ! 🚀",
+    "text-about": "<p>CopyBox est un outil gratuit conçu pour vous faciliter la vie en copiant du texte en un seul clic. Si vous l’avez trouvé utile et souhaitez soutenir son développement, pensez à faire un don.</p><p>💙 Chaque contribution nous aide à améliorer et à maintenir CopyBox en ligne.</p><p>🔹 Faites un don ici : 👉 Faites votre don via PayPal</p><p> Merci pour votre soutien ! 🙌</p>"
+  },
+  "welcome": "Bienvenue",
+  "greeting": "Bonjour {{name}} !",
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "export": "Exporter",
+    "import": "Importer",
+    "msg-success-import": "✅ Données importées avec succès.",
+    "msg-error-import": "❌ Erreur lors de l'importation des données."
+  },
+  "search": {
+    "title": "Rechercher",
+    "placeholder": "Rechercher..."
+  },
+  "category-all": "Tous",
+  "copybox": {
+    "title": "Ajouter un champ",
+    "input-title": "Titre",
+    "input-title-placeholder": "Entrez le titre ici...",
+    "input-value": "Valeur",
+    "input-value-placeholder": "Entrez la valeur ici...",
+    "option-delete": "Supprimer",
+    "option-edit": "Modifier",
+    "button-save": "Enregistrer",
+    "msg-success-copy": "Texte copié dans le presse-papiers ! 🎉",
+    "msg-error-copy": "Impossible de copier le texte.",
+    "success-add": "Champ ajouté avec succès ! 🎉",
+    "success-update": "Champ mis à jour avec succès ! 🎉",
+    "error-add": "Erreur lors de l'ajout du champ.",
+    "error-update": "Erreur lors de la mise à jour du champ."
+  },
+  "alert-delete": {
+    "title": "Êtes-vous sûr ?",
+    "text": "Cette action est irréversible",
+    "confirmButtonText": "Oui, supprimer",
+    "cancelButtonText": "Annuler"
+  },
+  "folder": {
+    "title": "Dossiers",
+    "success-delete": "Dossier supprimé avec succès ! 🗑️",
+    "input-title-placeholder": "Entrez le nom du dossier ici...",
+    "validation-empty": "Le nom du dossier ne peut pas être vide",
+    "validation-exists": "Ce nom de dossier existe déjà 😢",
+    "success-create": "Dossier créé avec succès ! 🎉",
+    "success-update": "Dossier mis à jour avec succès ! 🎉",
+    "button-add": "Créer un dossier",
+    "modal-title": "Créer un dossier"
+  }
+}

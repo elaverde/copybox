@@ -1,0 +1,56 @@
+{
+  "about": {
+    "title": "Settings",
+    "subtitle-about": "Support CopyBox! 🚀",
+    "text-about": "<p>CopyBox is a free tool designed to make your life easier by copying text with a single click. If you've found it useful and want to support its development, consider making a donation.</p><p>💙 Every contribution helps us improve and keep CopyBox online.</p><p>🔹 Donate here: 👉 Make your donation with PayPal</p><p>Thank you for your support! 🙌</p>"
+  },
+  
+  "welcome": "Welcome",
+  "greeting": "Hello {{name}}!",
+  "settings":{
+    "title": "Settings",
+    "language": "Language",
+    "export": "Export",
+    "import": "Import",
+    "msg-success-import": "✅ Data imported successfully.",
+    "msg-error-import": "❌ Error importing data."
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search..."
+  },
+  "category-all": "All",
+  "copybox": {
+    "title": "Add Field",
+    "input-title":"Title",
+    "input-title-placeholder": "Enter title here...",
+    "input-value": "Value",
+    "input-value-placeholder": "Enter value here...",
+    "option-delete": "Delete",
+    "option-edit": "Edit",
+    "button-save": "Save",
+    "msg-success-copy": "Text copied to clipboard! 🎉",
+    "msg-error-copy": "Failed to copy text.",
+    "success-add": "Field added successfully! 🎉",
+    "success-update": "Field updated successfully! 🎉",
+    "error-add": "Error adding field.",
+    "error-update": "Error updating field."
+  },
+  "alert-delete":{
+    "title": "Are you sure?",
+    "text": "This action cannot be undone",
+    "confirmButtonText": "Yes, delete",
+    "cancelButtonText": "Cancel"
+  },
+  "folder":{
+    "title": "Folders",
+    "success-delete": "Folder deleted successfully! 🗑️",
+    "input-title-placeholder": "Enter folder name here...",
+    "validation-empty": "Folder name cannot be empty",
+    "validation-exists": "This folder name already exists 😢",
+    "success-create": "Folder created successfully! 🎉",
+    "success-update": "Folder updated successfully! 🎉",
+    "button-add": "Create Folder",
+    "modal-title": "Create Folder"
+  }
+}

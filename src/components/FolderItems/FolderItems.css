@@ -4,16 +4,24 @@
 }
 
 .scroll-button {
-  background-color: #323232;
-  width: 50px;
-  height: 10px;
-  margin: 0 10px 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dark-bg-color);
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
   font-size: 10px;
   text-align: center;
   border: none;
   color: white;
   cursor: pointer;
-  width: 2%;
+}
+
+.scroll-button svg {
+  width: 10px; /* Tamaño del ícono */
+  height: 10px;
+  color: white;
 }
 
 .folder-list {
@@ -21,17 +29,35 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
-  width: 92%;
+  width: 100%;
   overflow: hidden;
-  padding-bottom: 5px;
+  padding: 2px 0 2px 0;
 }
 
 .folder-list li {
-  padding: 10px;
+  padding: 10px 10px;
   white-space: nowrap;
   cursor: pointer;
-}
-.active {
-  background-color: var(--dark-accent-color);
+  position: relative;
   color: white;
+  background-color: transparent;
+  background-repeat: repeat-x;
+}
+
+.folder-list li.active {
+  background-color: var(--dark-accent-color);
+  animation: fadeAndMoveBackground 1s ease forwards;
+  color: white;
+  border-radius: 5px;
+}
+
+@keyframes fadeAndMoveBackground {
+  0% {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }

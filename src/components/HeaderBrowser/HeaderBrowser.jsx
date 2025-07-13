@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { FaFolder, FaSearch } from "react-icons/fa";
+import { FaFolder, FaSearch, FaCog } from "react-icons/fa";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import logo from "../../assets/logo.png";
 import "./HeaderBrowser.css";
 
 const Header = ({ onSearch, searchTerm }) => {
   const [searchQuery, setSearchQuery] = useState("");
-
+const { t, i18n } = useTranslation();
   useEffect(() => {
     setSearchQuery(searchTerm);
   }, [searchTerm]);
@@ -36,7 +37,7 @@ const Header = ({ onSearch, searchTerm }) => {
         <input
           type="text"
           className="search-input"
-          placeholder="Buscar..."
+          placeholder={t("search.placeholder")}
           value={searchQuery} // Ahora `searchQuery` siempre reflejará `searchTerm`
           onChange={handleInputChange}
           onKeyDown={handleKeyPress}
@@ -51,9 +52,18 @@ const Header = ({ onSearch, searchTerm }) => {
         </button>
       </div>
       <div className="header-right">
-        <Link to="/folder-creator">
-          <FaFolder size={24} />
-        </Link>
+        <ul>
+          <li>
+            <Link to="/folder-creator">
+              <FaFolder size={24} />
+            </Link>
+          </li>
+          <li>
+            <Link to="/about">
+              <FaCog size={24} />
+            </Link>
+          </li>
+        </ul>
       </div>
     </header>
   );

@@ -8,7 +8,7 @@ import ClipboardCreator from "./pages/ClipboardCreator";
 import FolderCreator from "./pages/FolderCreator";
 import { CopyboxProvider } from "./context/CopyboxContext.jsx";
 import "./App.css";
-
+import "./i18n.js";
 function App() {
   const [selectedItem, setSelectedItem] = useState(null);
 

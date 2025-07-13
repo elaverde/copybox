@@ -2,10 +2,17 @@ import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 import { useState } from "react";
-
+import HeaderPage from "../components/HeaderPage/HeaderPage";
+import { useTranslation } from "react-i18next";
+import parse from "html-react-parser";
+import { Toaster, toast } from "react-hot-toast";
 const About = () => {
   const [file, setFile] = useState(null);
+  const { t, i18n } = useTranslation();
 
+  const handleLanguageChange = (e) => {
+    i18n.changeLanguage(e.target.value);
+  };
   // Función para Exportar
   const exportData = () => {
     const data = {
@@ -39,38 +46,28 @@ const About = () => {
         if (data.copybox_bd && typeof data.copybox_bd === "object") {
           localStorage.setItem("copybox_bd", JSON.stringify(data.copybox_bd));
         }
-        alert("✅ Datos importados correctamente.");
+        alert(t("settings.msg-success-import"));
       } catch (error) {
-        alert("❌ Error al importar los datos.");
+        alert(t("settings.msg-error-import"));
       }
     };
     reader.readAsText(file);
     // refrescar la página
     window.location.reload();
   };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setShowModal(false), 300);
+    setInputValue(""); // Limpiar input al cerrar
+    setError(""); // Resetear error al cerrar
+  };
 
   return (
     <div>
-      <header className="header primary-background">
-        <div className="header-left">
-          <img src={logo} width={40} alt="Logo" />
-          <h1>CopyBox</h1>
-        </div>
-        <div className="header-right close-button">
-          <Link to="/">
-            <FaTimes size={24} />
-          </Link>
-        </div>
-      </header>
+      <HeaderPage title={t("settings.title")} onClose={handleCloseModal} />
       <div className="about">
-        <h1>¡Apoya CopyBox! 🚀</h1>
-        <p>
-          CopyBox es una herramienta gratuita diseñada para hacerte la vida más
-          fácil al copiar texto con un solo clic. Si te ha sido útil y quieres
-          ayudar a mantener su desarrollo, considera hacer una donación.
-        </p>
-        <p>💙 Cada aporte nos ayuda a mejorar y mantener CopyBox en línea. </p>
-        <p>🔹 Dona aquí: 👉 Haz tu donación con PayPal</p>
+        <h1>{t("about.subtitle-about")}</h1>
+        {parse(t("about.text-about"))}
         <form
           action="https://www.paypal.com/donate"
           method="post"
@@ -94,11 +91,22 @@ const About = () => {
             height="1"
           />
         </form>
-        ¡Gracias por tu apoyo! 🙌
-        <h2>Exportar</h2>
-        <button onClick={exportData}>📤 Exportar Datos</button>
-        <h2>Importar</h2>
-        <input type="file" accept=".json" onChange={importData} />
+        <div className="settings-container">
+          <h3>{t("settings.language")}</h3>
+          <select onChange={handleLanguageChange} value={i18n.language}>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="br">Português</option>
+            <option value="fr">Français</option>
+
+          </select>
+
+          <h3>{t("settings.export")}</h3>
+          <button onClick={exportData}>📤 {t("settings.export")}</button>
+
+          <h3>{t("settings.import")}</h3>
+          <input type="file" accept=".json" onChange={importData} />
+        </div>
       </div>
     </div>
   );

@@ -6,8 +6,9 @@ import AddCopy from "../components/AddCopy/AddCopy";
 import { useCopybox } from "../context/CopyboxContext.jsx";
 import { Toaster, toast } from "react-hot-toast";
 import Swal from "sweetalert2";
-
+import { useTranslation } from "react-i18next";
 const FolderCreator = () => {
+  const { t, i18n } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -23,29 +24,28 @@ const FolderCreator = () => {
     const trimmedValue = inputValue.trim();
 
     if (trimmedValue === "") {
-      setError("El nombre de la carpeta no puede estar vacío");
-      toast.error("Por favor, ingresa un nombre válido.");
+      // setError("El nombre de la carpeta no puede estar vacío");
+      toast.error(t("folder.validation-empty"));
       return;
     }
     if (addKey(trimmedValue)) {
       setInputValue("");
       setRefreshKey((prevKey) => prevKey + 1);
-      toast.success("¡Carpeta creada con éxito! 🎉");
+      toast.success(t("folder.success-create"));
       handleCloseModal();
     } else {
-      toast.error("Este nombre de carpeta ya existe 😢");
+      toast.error(t("folder.validation-exists"));
       return;
     }
   };
   const handleDelete = (key) => {
-    //toast.success("¡Carpeta eliminada con éxito! 🗑️");
     Swal.fire({
-      title: "¿Estás seguro?",
-      text: "Esta acción no se puede deshacer",
+      title: t("alert-delete.title"),
+      text: t("alert-delete.text"),
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Sí, eliminar",
-      cancelButtonText: "Cancelar",
+      confirmButtonText: t("alert-delete.confirmButtonText"),
+      cancelButtonText: t("alert-delete.cancelButtonText"),
     }).then((result) => {
       if (result.isConfirmed) {
         deleteKey(key);
@@ -53,16 +53,16 @@ const FolderCreator = () => {
         if (getActiveKey() === key) {
           selectKey("Todos");
         }
-        toast.success("¡Carpeta eliminada con éxito! 🗑️");
+        toast.success(t("folder.success-delete"));
       }
     });
   };
   const handleUpdate = (oldKey, newKey) => {
     if (updateKey(oldKey, newKey)) {
       setRefreshKey((prevKey) => prevKey + 1);
-      toast.success("¡Carpeta actualizada con éxito! 🎉");
+      toast.success(t("folder.success-update"));
     } else {
-      toast.error("Este nombre de carpeta ya existe 😢");
+      toast.error(t("folder.validation-exists"));
     }
   };
   const handleCloseModal = () => {
@@ -79,7 +79,7 @@ const FolderCreator = () => {
   };
   return (
     <div>
-      <HeaderPage title="Carpetas" onClose={handleCloseModal} />
+      <HeaderPage title={t("folder.title")} onClose={handleCloseModal} />
       <FolderItemsEditor
         key={refreshKey}
         items={data}
@@ -90,7 +90,7 @@ const FolderCreator = () => {
       <Toaster position="top-right" /> {/* Renderizar notificaciones */}
       {showModal && (
         <Modal
-          title="Crear Carpeta"
+          title={t("folder.modal-title")}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
         >
@@ -99,7 +99,7 @@ const FolderCreator = () => {
             className="input"
             value={inputValue}
             onChange={handleInputChange}
-            placeholder="Nombre de la carpeta"
+            placeholder={t("folder.input-title-placeholder")}
           />
           {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}{" "}
           {/* Muestra el error */}
@@ -108,7 +108,7 @@ const FolderCreator = () => {
             onClick={handleSubmit}
             disabled={inputValue.trim() === ""}
           >
-            Crear Carpeta
+            {t("folder.button-add")}
           </button>
         </Modal>
       )}

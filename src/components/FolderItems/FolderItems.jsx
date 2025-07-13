@@ -2,6 +2,7 @@ import { useRef } from "react";
 import PropTypes from "prop-types";
 import "./FolderItems.css";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { t } from "i18next";
 const FolderItems = ({ menuItems, onGetActive, onSelectActive }) => {
   const listRef = useRef(null);
 
@@ -25,7 +26,7 @@ const FolderItems = ({ menuItems, onGetActive, onSelectActive }) => {
             onSelectActive("Todos");
           }}
         >
-          Todos
+          {t("category-all")}
         </li>
         {menuItems
           .filter((item) => item.key !== "Otros")

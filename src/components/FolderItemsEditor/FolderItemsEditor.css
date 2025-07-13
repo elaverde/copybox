@@ -1,26 +1,37 @@
+
 ul {
   list-style: none;
   padding: 0;
-  margin: 0;
-  width: 98%;
+  box-sizing: border-box;
+  width: auto;
+  margin-right: 7px ;
   top: 90px;
 }
 li {
-  margin: 5px 8px 5px 8px;
-  padding: 8px 8px 8px 15px;
+  margin: 2px 4px 2px 4px;
+  padding: 4px 4px 4px 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+  
   font-family: var(--font-family);
-  font-size: 24px;
+  font-size: 20px;
   background-color: var(--dark-secondary-bg-color);
   input {
-    background-color: var(--dark-secondary-bg-color);
+    font-size: 20px;
+    background-color: var(--dark-primary-bg-color);
     width: 100%;
     color: white;
     border: 0;
+    border-bottom:  1px solid white;
+    width: 100%;
+    padding: 4px 4px 4px 15px;
     outline: none;
     font-family: "Roboto Mono", monospace;
   }
   svg {
     transition: all 0.3s ease;
+/*    margin: 10px;*/
   }
   svg:hover {
     cursor: pointer;

@@ -1,0 +1,55 @@
+{
+  "about": {
+    "title": "Configurações",
+    "subtitle-about": "Apoie o CopyBox! 🚀",
+    "text-about": "<p>CopyBox é uma ferramenta gratuita projetada para facilitar sua vida ao copiar texto com um único clique. Se foi útil para você e deseja ajudar a manter seu desenvolvimento, considere fazer uma doação.</p><p>💙 Cada contribuição nos ajuda a melhorar e manter o CopyBox online.</p><p>🔹 Doe aqui: 👉 Faça sua doação via PayPal</p><p> Obrigado pelo seu apoio! 🙌</p>"
+  },
+  "welcome": "Bem-vindo",
+  "greeting": "Olá {{name}}!",
+  "settings": {
+    "title": "Configurações",
+    "language": "Idioma",
+    "export": "Exportar",
+    "import": "Importar",
+    "msg-success-import": "✅ Dados importados com sucesso.",
+    "msg-error-import": "❌ Erro ao importar os dados."
+  },
+  "search": {
+    "title": "Buscar",
+    "placeholder": "Buscar..."
+  },
+  "category-all": "Todos",
+  "copybox": {
+    "title": "Adicionar Campo",
+    "input-title": "Título",
+    "input-title-placeholder": "Digite o título aqui...",
+    "input-value": "Valor",
+    "input-value-placeholder": "Digite o valor aqui...",
+    "option-delete": "Excluir",
+    "option-edit": "Editar",
+    "button-save": "Salvar",
+    "msg-success-copy": "Texto copiado para a área de transferência! 🎉",
+    "msg-error-copy": "Não foi possível copiar o texto.",
+    "success-add": "Campo adicionado com sucesso! 🎉",
+    "success-update": "Campo atualizado com sucesso! 🎉",
+    "error-add": "Erro ao adicionar o campo.",
+    "error-update": "Erro ao atualizar o campo."
+  },
+  "alert-delete": {
+    "title": "Tem certeza?",
+    "text": "Esta ação não pode ser desfeita",
+    "confirmButtonText": "Sim, excluir",
+    "cancelButtonText": "Cancelar"
+  },
+  "folder": {
+    "title": "Pastas",
+    "success-delete": "Pasta excluída com sucesso! 🗑️",
+    "input-title-placeholder": "Digite o nome da pasta aqui...",
+    "validation-empty": "O nome da pasta não pode estar vazio",
+    "validation-exists": "Este nome de pasta já existe 😢",
+    "success-create": "Pasta criada com sucesso! 🎉",
+    "success-update": "Pasta atualizada com sucesso! 🎉",
+    "button-add": "Criar Pasta",
+    "modal-title": "Criar Pasta"
+  }
+}

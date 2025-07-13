@@ -1,27 +1,39 @@
-.header {
+.header_page {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 5px;
   color: white;
-  margin-bottom: 5px;
+  padding: 5px 10px 5px 10px;
+  margin: 10px 0 0 0;
 }
-.header-left {
+.header_page h1 {
+  margin: 0;
+}
+
+.header_page-left {
   display: flex;
   align-items: center;
   margin-left: 5px;
+  gap: 10px;
 }
-.header-right {
-  margin-right: 5px;
+.header_page-right {
   display: flex;
+  justify-content: center;
   align-items: center;
-  cursor: pointer;
+  margin: 0;
   background-color: var(--dark-secondary-bg-color);
-  border-radius: 15px;
   color: white;
   transition: all 0.3s ease;
   border: none;
-  width: 25px;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 20%;
 }
-.header-right:hover {
-  background-color: #00b368;
+.header_page-right svg {
+  width: 20px; /* Tamaño del ícono */
+  height: 20px;
+  color: white;
+}
+.header_page-right:hover {
+  background-color: var(--dark-accent-color);
 }
