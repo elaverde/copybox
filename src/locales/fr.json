@@ -12,7 +12,10 @@
     "export": "Exporter",
     "import": "Importer",
     "msg-success-import": "✅ Données importées avec succès.",
-    "msg-error-import": "❌ Erreur lors de l'importation des données."
+    "msg-error-import": "❌ Erreur lors de l'importation des données.",
+    "tab-about": "À propos de Copybox",
+    "tab-languages": "Langues",
+    "tab-export-import": "Exporter Importer"
   },
   "search": {
     "title": "Rechercher",

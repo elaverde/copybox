@@ -1,18 +1,16 @@
-import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
-import { FaTimes } from "react-icons/fa";
 import { useState } from "react";
 import HeaderPage from "../components/HeaderPage/HeaderPage";
 import { useTranslation } from "react-i18next";
 import parse from "html-react-parser";
-import { Toaster, toast } from "react-hot-toast";
+
 const About = () => {
-  const [file, setFile] = useState(null);
+  const [activeTab, setActiveTab] = useState(0);
   const { t, i18n } = useTranslation();
 
   const handleLanguageChange = (e) => {
     i18n.changeLanguage(e.target.value);
   };
+
   // Función para Exportar
   const exportData = () => {
     const data = {
@@ -47,7 +45,7 @@ const About = () => {
           localStorage.setItem("copybox_bd", JSON.stringify(data.copybox_bd));
         }
         alert(t("settings.msg-success-import"));
-      } catch (error) {
+      } catch (importError) {
         alert(t("settings.msg-error-import"));
       }
     };
@@ -55,42 +53,47 @@ const About = () => {
     // refrescar la página
     window.location.reload();
   };
+
   const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setShowModal(false), 300);
-    setInputValue(""); // Limpiar input al cerrar
-    setError(""); // Resetear error al cerrar
+    window.history.back();
   };
 
-  return (
-    <div>
-      <HeaderPage title={t("settings.title")} onClose={handleCloseModal} />
-      <div className="about">
-        <h1>{t("about.subtitle-about")}</h1>
-        {parse(t("about.text-about"))}
-        <form
-          action="https://www.paypal.com/donate"
-          method="post"
-          target="_blank"
-        >
-          <input type="hidden" name="hosted_button_id" value="UKXCK63HR9PH4" />
-          <input
-            type="image"
-            src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
-            border="0"
-            name="submit"
-            title="PayPal - The safer, easier way to pay online!"
-            alt="Donate with PayPal button"
-            onclick="window.open('https://www.paypal.com/donate?hosted_button_id=UKXCK63HR9PH4', '_blank', 'width=500,height=700'); return false;"
-          />
-          <img
-            alt=""
-            border="0"
-            src="https://www.paypal.com/en_CO/i/scr/pixel.gif"
-            width="1"
-            height="1"
-          />
-        </form>
+  const tabs = [
+    {
+      name: t("settings.tab-about"),
+      content: (
+        <div>
+          <h1>{t("about.subtitle-about")}</h1>
+          {parse(t("about.text-about"))}
+          <form
+            action="https://www.paypal.com/donate"
+            method="post"
+            target="_blank"
+          >
+            <input type="hidden" name="hosted_button_id" value="UKXCK63HR9PH4" />
+            <input
+              type="image"
+              src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
+              border="0"
+              name="submit"
+              title="PayPal - The safer, easier way to pay online!"
+              alt="Donate with PayPal button"
+              onClick={() => window.open('https://www.paypal.com/donate?hosted_button_id=UKXCK63HR9PH4', '_blank', 'width=500,height=700')}
+            />
+            <img
+              alt=""
+              border="0"
+              src="https://www.paypal.com/en_CO/i/scr/pixel.gif"
+              width="1"
+              height="1"
+            />
+          </form>
+        </div>
+      ),
+    },
+    {
+      name: t("settings.tab-languages"),
+      content: (
         <div className="settings-container">
           <h3>{t("settings.language")}</h3>
           <select onChange={handleLanguageChange} value={i18n.language}>
@@ -98,14 +101,43 @@ const About = () => {
             <option value="es">Español</option>
             <option value="br">Português</option>
             <option value="fr">Français</option>
-
           </select>
-
+        </div>
+      ),
+    },
+    {
+      name: t("settings.tab-export-import"),
+      content: (
+        <div className="settings-container">
           <h3>{t("settings.export")}</h3>
           <button onClick={exportData}>📤 {t("settings.export")}</button>
 
           <h3>{t("settings.import")}</h3>
           <input type="file" accept=".json" onChange={importData} />
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <div>
+      <HeaderPage title={t("settings.title")} onClose={handleCloseModal} />
+      <div className="about">
+        <div className="tabs-container">
+          <div className="tabs-header">
+            {tabs.map((tab, index) => (
+              <button
+                key={index}
+                className={`tab-button ${activeTab === index ? "active" : ""}`}
+                onClick={() => setActiveTab(index)}
+              >
+                {tab.name}
+              </button>
+            ))}
+          </div>
+          <div className="tab-content">
+            {tabs[activeTab].content}
+          </div>
         </div>
       </div>
     </div>
