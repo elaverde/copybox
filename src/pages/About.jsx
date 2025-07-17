@@ -54,8 +54,11 @@ const About = () => {
     window.location.reload();
   };
 
-  const handleCloseModal = () => {
-    window.history.back();
+ const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setShowModal(false), 300);
+    setInputValue(""); // Limpiar input al cerrar
+    setError(""); // Resetear error al cerrar
   };
 
   const tabs = [
