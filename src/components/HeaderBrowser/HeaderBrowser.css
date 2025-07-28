@@ -29,6 +29,7 @@
 .header-right ul {
   display: flex;
   list-style: none;
+  justify-content: space-around;
   padding: 0;
   margin: 0;
 }
@@ -36,6 +37,7 @@
   background-color: var(--dark-secondary-bg-color);
   border-radius: 15px;
   transition: all 0.3s ease;
+  color: #ccc;
 }
 .header-right ul a:hover {
   color: var(--dark-accent-color);

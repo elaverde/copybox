@@ -97,19 +97,37 @@ body {
 .row label {
   margin: 2px 8px 2px 10px;
 }
-.about {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: end;
-  padding: 20px;
-  margin: 20px;
-  border-radius: 10px;
-  background-color: var(--dark-secondary-bg-color);
-  color: var(--font-color);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 
+
+.browser {
+  background-color: var(--dark-secondary-bg-color);
+  width: 100%;
+}
+.browser_nav {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  padding-right: 15px;
+  background-color: var(--dark-secondary-bg-color);
+  z-index: 100;
+  border-bottom: 1px solid #55555554;
+}
+.browser_content {
+  background-color: var(--dark-bg-color);
+  box-sizing: border-box;
+  margin-top: 150px;
+  padding-bottom: 70px;
+  width: 100%;
+  min-height: 500px !important;
+}
+.about {
+  margin: 20px;
+  padding: 2rem;
+  background-color: var(--dark-secondary-bg-color);
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
 .about button {
   margin-top: 10px;
   background-color: var(--dark-accent-color);
@@ -137,39 +155,6 @@ body {
   margin-bottom: 10px;
   background-color: var(--dark-secondary-bg-color);
 }
-
-.browser {
-  background-color: var(--dark-secondary-bg-color);
-  width: 100%;
-}
-.browser_nav {
-  top: 0;
-  position: fixed;
-  width: 100%;
-  padding-right: 15px;
-  background-color: var(--dark-secondary-bg-color);
-  z-index: 100;
-  border-bottom: 1px solid #55555554;
-}
-.browser_content {
-  background-color: var(--dark-bg-color);
-  box-sizing: border-box;
-  margin-top: 150px;
-  padding-bottom: 70px;
-  width: 100%;
-  min-height: 500px !important;
-}
-
-.about {
-  max-width: 800px;
-  margin: 20px;
-  padding: 2rem;
-  background-color: var(--dark-secondary-bg-color);
-  border-radius: 1rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  box-sizing: border-box;
-}
-
 .about h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
@@ -257,9 +242,8 @@ form input[type="image"]:hover {
 
 .tabs-header {
   display: flex;
-  border-bottom: 2px solid var(--dark-accent-color);
   margin-bottom: 1.5rem;
-  gap: 0;
+  gap: 10px;
 }
 
 .tab-button {
@@ -283,6 +267,7 @@ form input[type="image"]:hover {
 
 .tab-button.active {
   background-color: var(--dark-secondary-bg-color) !important;
+  border: 1px solid var(--dark-accent-color);
   color: var(--dark-accent-color) !important;
 }
 

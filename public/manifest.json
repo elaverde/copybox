@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "CopyBox",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Guarda y organiza fragmentos de texto fácilmente con CopyBox.",
   "permissions": [],
   "action": {

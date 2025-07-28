@@ -15,4 +15,10 @@
 .add-copy-button:hover {
   background-color: var(--dark-accent-color);
   border: 2px solid #fff;
+  color: white;
+}
+
+.add-copy-button a{
+  color: white;
+  text-decoration: none;
 }
