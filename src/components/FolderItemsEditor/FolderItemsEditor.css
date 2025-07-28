@@ -1,5 +1,5 @@
 
-ul {
+.folder-items-editor {
   list-style: none;
   padding: 0;
   box-sizing: border-box;
@@ -7,7 +7,8 @@ ul {
   margin-right: 7px ;
   top: 90px;
 }
-li {
+
+.folder-items-editor li {
   margin: 2px 4px 2px 4px;
   padding: 4px 4px 4px 15px;
   display: flex;
@@ -17,24 +18,27 @@ li {
   font-family: var(--font-family);
   font-size: 20px;
   background-color: var(--dark-secondary-bg-color);
-  input {
-    font-size: 20px;
-    background-color: var(--dark-primary-bg-color);
-    width: 100%;
-    color: white;
-    border: 0;
-    border-bottom:  1px solid white;
-    width: 100%;
-    padding: 4px 4px 4px 15px;
-    outline: none;
-    font-family: "Roboto Mono", monospace;
-  }
-  svg {
-    transition: all 0.3s ease;
+}
+
+.folder-items-editor li input {
+  font-size: 20px;
+  background-color: var(--dark-primary-bg-color);
+  width: 100%;
+  color: white;
+  border: 0;
+  border-bottom:  1px solid white;
+  width: 100%;
+  padding: 4px 4px 4px 15px;
+  outline: none;
+  font-family: "Roboto Mono", monospace;
+}
+
+.folder-items-editor li svg {
+  transition: all 0.3s ease;
 /*    margin: 10px;*/
-  }
-  svg:hover {
-    cursor: pointer;
-    color: var(--dark-accent-color);
-  }
+}
+
+.folder-items-editor li svg:hover {
+  cursor: pointer;
+  color: var(--dark-accent-color);
 }

@@ -96,7 +96,7 @@ const FolderCreator = () => {
         >
           <input
             type="text"
-            className="input"
+            className="modal-input"
             value={inputValue}
             onChange={handleInputChange}
             placeholder={t("folder.input-title-placeholder")}
@@ -104,7 +104,7 @@ const FolderCreator = () => {
           {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}{" "}
           {/* Muestra el error */}
           <button
-            className="button"
+            className="modal-button"
             onClick={handleSubmit}
             disabled={inputValue.trim() === ""}
           >

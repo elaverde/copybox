@@ -41,8 +41,8 @@
   color: var(--dark-accent-color);
 }
 
-a:link,
-a:visited {
+.header a:link,
+.header a:visited {
   color: white;
 }
 .header-center {
